@@ -39,21 +39,28 @@ public class FlowLayout extends ViewGroup {
         measureChildren(widthMeasureSpec, heightMeasureSpec);
 
         int maxChildrenWidth = 0;
-        int maxChildrenHeight = getChildAt(0).getMeasuredHeight();
+        int maxChildrenHeight = 0;
         int sum = 0;
 
         // 假设布局后，计算所有子View测量的 最大宽度和最大高度
         for (int i = 0; i < getChildCount(); i++) {
-            int tmp = getChildAt(i).getMeasuredWidth();
+            View v = getChildAt(i);
+            MarginLayoutParams mlp = (MarginLayoutParams) v.getLayoutParams();
+            int tmp = v.getMeasuredWidth() + mlp.leftMargin + mlp.rightMargin;
+            if (i == 0) {
+                maxChildrenHeight += getChildAt(0).getMeasuredHeight() + mlp.topMargin + mlp.bottomMargin;
+            }
             if (sum + tmp > widthSize) {
                 maxChildrenWidth = sum;
-                maxChildrenHeight += getChildAt(i).getMeasuredHeight();// 一般情况下，每个 item 高度都是相同的
+                maxChildrenHeight += getChildAt(i).getMeasuredHeight() + mlp.topMargin + mlp.bottomMargin;// 一般情况下，每个 item 高度都是相同的
                 sum = tmp;
                 levelNodes.add(i);
             } else {
                 sum += tmp;
             }
         }
+
+        System.out.println(maxChildrenWidth + "====" + maxChildrenHeight);
 
         // 根据测量模式，设置相应的 最大宽度和高度
         setMeasuredDimension(widthSpec == MeasureSpec.EXACTLY ? widthSize : maxChildrenWidth,
@@ -79,19 +86,29 @@ public class FlowLayout extends ViewGroup {
      */
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        int deltaX = 0;
-        int deltaY = 0;
+        MarginLayoutParams lp0 = (MarginLayoutParams) getChildAt(0).getLayoutParams();
+        int deltaX = lp0.leftMargin;
+        int deltaY = lp0.topMargin;
 
         for (int i = 0; i < getChildCount(); i++) {
             View v = getChildAt(i);
+            MarginLayoutParams mlp = (MarginLayoutParams) v.getLayoutParams();
             if (levelNodes.contains(i)) {
-                deltaX = 0;
-                deltaY += v.getMeasuredHeight();
+                // 计算下一行的起始位置
+                deltaX = mlp.leftMargin;
+                deltaY += v.getMeasuredHeight() + mlp.bottomMargin + mlp.topMargin;
             }
             v.layout(deltaX, deltaY, deltaX + v.getMeasuredWidth(), deltaY + v.getMeasuredHeight());
-            deltaX += v.getMeasuredWidth();
+            deltaX += v.getMeasuredWidth() + mlp.rightMargin + mlp.leftMargin;
         }
     }
 
 
+    // 由于我们要设置 子View 的 margin，所以要对 layoutParams 做处理
+    // 这样设置了之后，上面 测量的方法中才能使用 margin
+    // 模仿 RelativeLayout 做法
+    @Override
+    public LayoutParams generateLayoutParams(AttributeSet attrs) {
+        return new MarginLayoutParams(getContext(), attrs);
+    }
 }

@@ -13,61 +13,52 @@
         android:layout_height="wrap_content">
 
         <TextView
+            style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_bg"
-            android:text="Java开发工程师"
-            android:textSize="16sp" />
+            android:text="Java开发工程师" />
 
         <TextView
+            style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/border_bg"
-            android:text="Android开发工程师"
-            android:textSize="16sp" />
+            android:text="Android开发工程师" />
 
         <TextView
+            style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_bg"
-            android:text="IOS开发工程师"
-            android:textSize="16sp" />
+            android:text="IOS开发工程师" />
 
         <TextView
+            style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_bg"
-            android:text="Python开发工程师"
-            android:textSize="16sp" />
+            android:text="Python开发工程师" />
 
         <TextView
+            style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/border_bg"
-            android:text="C/C++开发工程师"
-            android:textSize="16sp" />
+            android:text="C/C++开发工程师" />
 
         <TextView
+            style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_bg"
-            android:text="机器学习"
-            android:textSize="16sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border_bg"
-            android:text="数据挖掘与数据分析"
-            android:textSize="16sp" />
+            android:text="机器学习" />
 
         <TextView
+            style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_bg"
-            android:text="测试开发工程师"
-            android:textSize="16sp" />
+            android:text="数据挖掘" />
+
+        <TextView
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="测试开发工程师" />
 
     </com.gjr.viewgroup_flowlayout.FlowLayout>
 
