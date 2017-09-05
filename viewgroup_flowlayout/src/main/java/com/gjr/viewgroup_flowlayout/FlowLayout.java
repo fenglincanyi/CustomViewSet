@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class FlowLayout extends ViewGroup {
 
+
+    private int childrenCount;
     private List<Integer> levelNodes = new ArrayList<>();
 
     public FlowLayout(Context context) {
@@ -59,8 +61,6 @@ public class FlowLayout extends ViewGroup {
                 sum += tmp;
             }
         }
-
-        System.out.println(maxChildrenWidth + "====" + maxChildrenHeight);
 
         // 根据测量模式，设置相应的 最大宽度和高度
         setMeasuredDimension(widthSpec == MeasureSpec.EXACTLY ? widthSize : maxChildrenWidth,
@@ -110,5 +110,31 @@ public class FlowLayout extends ViewGroup {
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new MarginLayoutParams(getContext(), attrs);
+    }
+
+
+    @Override
+    public void addView(View child, int index, LayoutParams params) {// 这个方法最先执行
+        super.addView(child, index, params);
+        final int position = childrenCount;
+        child.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onItemClick(v, position);
+                }
+            }
+        });
+        childrenCount ++;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    private OnItemClickListener mListener;
+
+    public void setOnItemClick(OnItemClickListener listener) {
+        mListener = listener;
     }
 }

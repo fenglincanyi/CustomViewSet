@@ -9,6 +9,7 @@
 
 
     <com.gjr.viewgroup_flowlayout.FlowLayout
+        android:id="@+id/flowLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
