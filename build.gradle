@@ -21,3 +21,19 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+
+
+ext {
+    // Sdk and tools
+    minSdkVersion = 22// 临时改的，使用instant run
+    targetSdkVersion = 25
+    compileSdkVersion = 25
+    buildToolsVersion = '26.0.0'
+
+    // App dependencies
+    supportLibraryVersion = '25.3.1'
+}
+
+// 示例：可参考 google sample

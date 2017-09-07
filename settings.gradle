@@ -1,1 +1,1 @@
-include ':app', ':viewgroup_flowlayout'
+include ':app', ':viewgroup_flowlayout', ':view_basicdraw'
