@@ -1,9 +1,18 @@
 package com.gjr.view_basicdraw.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
 import android.graphics.Paint;
-import android.graphics.Path;
+import android.graphics.PathEffect;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.RectF;
+import android.graphics.Xfermode;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -16,7 +25,8 @@ import com.gjr.view_basicdraw.R;
 public class BasicGraphView1 extends View {
 
     private Paint paint;
-    private Path path;
+    private Bitmap bitmap;
+    private PorterDuffXfermode xfermode;
 
     public BasicGraphView1(Context context) {
         this(context, null);
@@ -35,11 +45,10 @@ public class BasicGraphView1 extends View {
     private void init() {
         paint = new Paint();
         paint.setAntiAlias(true);// 抗锯齿 alias
-//        paint.setStyle(Paint.Style.STROKE);
+        paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(5f);
 
-
-        path = new Path();
+        xfermode = new PorterDuffXfermode(PorterDuff.Mode.SRC_IN);
     }
 
 
@@ -47,30 +56,19 @@ public class BasicGraphView1 extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        path.moveTo(100, 100);
-        path.lineTo(400, 100);// 以(0，0) 为起点，传入的参数为重点画直线
-//        path.rLineTo(); // 参考上一个点，相对的画直线，如果没有上一个点，则默认以(0,0)为上一个点
-        path.lineTo(250, 200);
-        path.close();// 闭合起点和终点
+        canvas.saveLayer(100, 100, 300, 300, null, Canvas.ALL_SAVE_FLAG);// 设置一个 离屏缓冲
 
-        canvas.drawPath(path, paint);
+        paint.setColor(Color.RED);
+        canvas.drawCircle(200, 200, 100, paint);
+        paint.setXfermode(xfermode);
+
+        paint.setColor(Color.GREEN);
+        canvas.drawRoundRect(new RectF(100, 100, 200, 200), 20, 20, paint);
 
 
+        canvas.restore();
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// PorterDuff 文档：
+// https://developer.android.com/reference/android/graphics/PorterDuff.Mode.html

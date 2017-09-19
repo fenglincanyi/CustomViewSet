@@ -10,15 +10,19 @@
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content" />-->
 
-    <!--<com.gjr.view_basicdraw.view.BasicGraphView1-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
+    <com.gjr.view_basicdraw.view.BasicGraphView1
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!--<com.gjr.view_basicdraw.view.BasicGraphView2-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
 
     <!--<com.gjr.view_basicdraw.view.BarChart-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content" />-->
 
-    <com.gjr.view_basicdraw.view.PieChart
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <!--<com.gjr.view_basicdraw.view.PieChart-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
 </RelativeLayout>
