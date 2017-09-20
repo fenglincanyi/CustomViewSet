@@ -106,19 +106,29 @@ public class BasicGraphView3 extends View {
 
         // 自定义变换： 控制点变换  matrix.setPolyToPoly()
 
+
+
         // 3D 变换
         canvas.save();
 
         camera.save(); // 保存 Camera 的状态
-        camera.rotateX(30); // 旋转 Camera 的三维空间
-        canvas.translate(100, 100); // 旋转之后把投影移动回来
+        camera.rotateX(40); // 旋转 Camera 的三维空间
+        canvas.translate(200, 200); // 旋转之后把投影移动回来
         camera.applyToCanvas(canvas); // 把旋转投影到 Canvas
-        canvas.translate(-100, -100); // 旋转之前把绘制内容移动到轴心（原点）
-        camera.setLocation(0, 0, 30);
+        canvas.translate(-200, -200); // 旋转之前把绘制内容移动到轴心（原点）
         camera.restore(); // 恢复 Camera 的状态
 
-        canvas.drawBitmap(bitmap, 200, 200, paint);
+        // 原理解释：
+        // 我们要在 画布（白纸上）画图，画出一个立体的东东；  我们将 画布（白纸）移动，移动到 画布的左上角的那个点  和  将要画的图形的中心点 重合，然后 camera 做投影操作（对做了旋转后），我们将投影记录下来，
+        // 把投影绘制到 画布上， 我们再进行还原操作，即 将画布 移动回原来原点的位置，这时候，3D效果的投影就正常的落在正确的位置上了
+
+        // 要注意，此过程 移动 canvas 的目的就是为了 间接的移动  camera
+
+        //  Camera 默认的位置： (0, 0, -8)（英寸） 1英寸 = 72 px   所以默认位置是:  (0, 0, -576)  左手坐标系（垂直向屏幕内 为 正）   http://www.gcssloop.com/customview/matrix-3d-camera
+
+        canvas.drawBitmap(bitmap, 100, 100, paint);
         canvas.restore();
+
     }
 }
 // 注意：
