@@ -125,6 +125,7 @@ public class BasicGraphView3 extends View {
         // 要注意，此过程 移动 canvas 的目的就是为了 间接的移动  camera
 
         //  Camera 默认的位置： (0, 0, -8)（英寸） 1英寸 = 72 px   所以默认位置是:  (0, 0, -576)  左手坐标系（垂直向屏幕内 为 正）   http://www.gcssloop.com/customview/matrix-3d-camera
+        //  当 看到的 3D 效果 比较大，比较夸张时， 可以设置 location    camera.setLocation(0, 0, 10);
 
         canvas.drawBitmap(bitmap, 100, 100, paint);
         canvas.restore();
