@@ -33,6 +33,19 @@ paint.setColorFilter(new LightingColorFilter(0xff00ff, 0));
 PorterDuffColorFilter filter = new PorterDuffColorFilter(Color.parseColor("#22ff00"), PorterDuff.Mode.SRC_OUT);
 paint.setColorFilter(filter);
 
+// 4. shader
+如：LinearGradient
+shader = LinearGradient(0f, 0f, measuredWidth.toFloat(), measuredHeight.toFloat(),
+                resources.getColor(R.color.recording_btn_color0), resources.getColor(R.color.recording_btn_color1),
+                Shader.TileMode.CLAMP)
+mPaint.shader = shader
+
+/**
+ * LinearGradient 的坐标都是以此view 的位置(左上角定点)作为参考点
+ * draw 图形，也是以此view 的位置(左上角定点)作为参考点
+ * 不然可能画出的没效果
+ */
+
 // 参考：http://wuxiaolong.me/2016/08/20/Paint/
 ```
 
