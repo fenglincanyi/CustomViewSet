@@ -87,19 +87,32 @@ class TransitionScaleView : FrameLayout {
         return true
     }
 
-    override fun dispatchDraw(canvas: Canvas) {
 
-
+    override fun draw(canvas: Canvas) {
         canvas.save();
+
+        super.draw(canvas)
+
         val path = Path()
         path.addCircle(scrrenW / 2, scrrenH, radius, Path.Direction.CCW);
-        canvas.clipPath(path, Region.Op.INTERSECT);
-        canvas.drawColor(Color.RED)
+        canvas.clipPath(path, Region.Op.DIFFERENCE);
+        canvas.drawColor(Color.parseColor("#ff0000"))
         canvas.restore();
-
-        super.dispatchDraw(canvas)
-
     }
+
+//    override fun dispatchDraw(canvas: Canvas) {
+//
+//
+//        canvas.save();
+//        val path = Path()
+//        path.addCircle(scrrenW / 2, scrrenH, radius, Path.Direction.CCW);
+//        canvas.clipPath(path, Region.Op.INTERSECT);
+//        canvas.drawColor(Color.RED)
+//        canvas.restore();
+//
+//        super.dispatchDraw(canvas)
+//
+//    }
 
     fun fun1(event: MotionEvent) {
         mCurrentY = event.y
